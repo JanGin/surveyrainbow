@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<!-- 简单主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 后缀名 -->
+	<constant name="struts.action.extension" value="action,do" />
+	
+	<package name="surveyrainbow" namespace="/" extends="struts-default">
+		<!-- registerAction -->
+		<action name="RegisterAction_*" class="org.progchen.SurveyZone.action.RegisterAction" method="{1}">
+			<result name="toRegisterPage">/register.jsp</result>
+			<result name="success">/WEB-INF/jsp/regSuccess.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+	</package>
+</struts>
