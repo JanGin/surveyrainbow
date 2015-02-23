@@ -56,6 +56,13 @@
 			<result name="editSurvey">/WEB-INF/jsp/editSurvey.jsp</result>
 		</action>
 		<!-- 页面的Action -->
-		<action name="PageAction_*" class="org.progchen.SurveyZone.action.PageAction" method="{1}"></action>
+		<action name="PageAction_*" class="org.progchen.SurveyZone.action.PageAction" method="{1}">
+			<result name="addPage">/WEB-INF/jsp/editPage.jsp</result>
+			<result name="editPage">/WEB-INF/jsp/editPage.jsp</result>
+		</action>
+		<!--问题的Action -->
+		<action name="QuestionAction_*" class="org.progchen.SurveyZone.action.QuestionAction" method="{1}">
+			<result name="toSelectQuestionType">/WEB-INF/jsp/selectQuestionType.jsp</result>
+		</action>
 	</package>
 </struts>

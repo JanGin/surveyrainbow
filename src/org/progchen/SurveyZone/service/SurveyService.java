@@ -2,6 +2,7 @@ package org.progchen.SurveyZone.service;
 
 import java.util.List;
 
+import org.progchen.SurveyZone.domain.Page;
 import org.progchen.SurveyZone.domain.Survey;
 import org.progchen.SurveyZone.domain.User;
 
@@ -30,7 +31,22 @@ public interface SurveyService {
 	Survey getSurveyWithChildren(Integer sid);
 
 	/**
+	 * 保存或更新调查页面
+	 * @param survey
+	 */
+	void saveOrUpatePage(Page page);
+
+	/**
 	 * 更新调查
 	 */
 	void updateSurvey(Survey survey);
+
+	/**
+	 * 根据页面id获取该调查的相关页面
+	 * @param pid
+	 * @return
+	 */
+	Page getPage(Integer pid);
+
+	
 }
