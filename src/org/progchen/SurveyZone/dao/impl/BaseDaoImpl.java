@@ -16,7 +16,7 @@ import org.progchen.SurveyZone.dao.BaseDao;
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Resource
-	private SessionFactory sf ;
+	protected SessionFactory sf ;
 	
 	private Class<T> clazz ;
 	
@@ -61,11 +61,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 	
 	public List<T> findEntitiesByHQL(String hql, Object... objects) {
-		Query q = sf.getCurrentSession().createQuery(hql);
+		Query query = sf.getCurrentSession().createQuery(hql);
 		for(int i = 0 ; i < objects.length ; i ++){
-			q.setParameter(i, objects[i]);
+			query.setParameter(i, objects[i]);
 		}
-		return q.list();
+		return query.list();
 	}
 
 }

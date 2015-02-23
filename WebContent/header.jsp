@@ -6,11 +6,11 @@
 <div class="divWhiteLine"></div>
 <div class="divNavigatorOuterFrame">
 	<div class="divNavigatorInnerFrame">
-		|首页|&nbsp;
-		|新建调查|&nbsp;
-		|我的调查|&nbsp;
+		|<s:a href="/surveyrainbow/index.jsp">首页|</s:a>&nbsp;
+		|<s:a action="SurveyAction_newSurvey" namespace="/">新建调查</s:a>|&nbsp;
+		|<s:a action="SurveyAction_mySurveys" namespace="/">我的调查</s:a>|&nbsp;
 		|参与调查|&nbsp;
-		|用户注册|&nbsp;
+		|<s:a action="RegisterAction_toRegisterPage" namespace="/">用户注册</s:a>|&nbsp;
 		|用户授权管理|&nbsp;
 		|角色管理|&nbsp;
 		|权限管理|&nbsp;

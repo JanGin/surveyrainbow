@@ -1,5 +1,7 @@
 package org.progchen.SurveyZone.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.progchen.SurveyZone.dao.BaseDao;
@@ -26,9 +28,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements
 	@Override
 	public boolean isRegistered(String email) {
 		String hql = "FROM User u WHERE u.email = ?";
-		
 		return ValidateUtil.isValid(this.findEntitiesByHQL(hql, email));
 	
+	}
+
+	@Override
+	public User validateSignIn(String email, String password) {
+		String hql = "FROM User u WHERE u.email = ? AND u.password = ?";
+		List<User> list = this.findEntitiesByHQL(hql, email,password);
+		return ValidateUtil.isValid(list) ? list.get(0) : null; 
 	}
 
 }

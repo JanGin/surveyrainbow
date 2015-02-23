@@ -7,7 +7,7 @@
 		<link rel="stylesheet" type="text/css" href='<s:url value="/styles.css" />'>
 	</head>
 	<body>
-		<s:include value="header.jsp" />
+		<s:include value="/header.jsp" />
 		<s:form action="RegisterAction_doRegister" namespace="/" method="post">
 		<table>
 			<tr>
@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td class="tdFormLabel"></td>
-				<td class="tdFormControl"><s:submit cssClass="btn" value="确定"/></td>
+				<td class="tdFormControl"><s:submit cssClass="btn" value="注册"/></td>
 			</tr>
 		</table>
 		</s:form>

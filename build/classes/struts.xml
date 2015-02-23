@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
@@ -11,11 +11,51 @@
 	<constant name="struts.action.extension" value="action,do" />
 	
 	<package name="surveyrainbow" namespace="/" extends="struts-default">
-		<!-- registerAction -->
+		
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<interceptor name="SignInInterceptor" class="org.progchen.SurveyZone.interceptor.SignInInterceptor" />
+			<interceptor-stack name="surveyrainbow_Stack">
+				<interceptor-ref name="SignInInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack">
+					<param name="modelDriven.RefreshModelBeforeResult">true</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 定义默认栈 -->
+		<default-interceptor-ref name="surveyrainbow_Stack"></default-interceptor-ref>
+		<!-- 定义全局结果 -->
+		<global-results>
+			<result name="index">/index.jsp</result>
+			<!-- 此页面需要被多个Action访问且重定向,配置成全局视图 -->
+			<result name="updatedSurvey" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SurveyAction_designSurvey</param>
+				<param name="sid">${sid}</param>
+			</result>
+		</global-results>
+		
+		<!-- 注册的Action -->
 		<action name="RegisterAction_*" class="org.progchen.SurveyZone.action.RegisterAction" method="{1}">
-			<result name="toRegisterPage">/register.jsp</result>
+			<result name="toRegisterPage">/WEB-INF/jsp/register.jsp</result>
 			<result name="success">/WEB-INF/jsp/regSuccess.jsp</result>
 			<result name="input">/register.jsp</result>
 		</action>
+		<!-- 登录的Action -->
+		<action name="SignInAction_*" class="org.progchen.SurveyZone.action.SignInAction" method="{1}">
+			<result name="toSignInPage">/WEB-INF/jsp/signIn.jsp</result>
+			<result name="input">/WEB-INF/jsp/signIn.jsp</result>
+			<result name="success">/WEB-INF/jsp/signIn.jsp</result>
+			<result name="logout" type="redirectAction">SignInAction_toSignInPage.do</result>
+		</action>
+		<!--调查的Action -->
+		<action name="SurveyAction_*" class="org.progchen.SurveyZone.action.SurveyAction" method="{1}">
+			<result name="newSurvey">/WEB-INF/jsp/newSurvey.jsp</result>
+			<result name="mySurveys">/WEB-INF/jsp/mySurveys.jsp</result>
+			<result name="designSurvey">/WEB-INF/jsp/designSurvey.jsp</result>
+			<result name="editSurvey">/WEB-INF/jsp/editSurvey.jsp</result>
+		</action>
+		<!-- 页面的Action -->
+		<action name="PageAction_*" class="org.progchen.SurveyZone.action.PageAction" method="{1}"></action>
 	</package>
 </struts>
