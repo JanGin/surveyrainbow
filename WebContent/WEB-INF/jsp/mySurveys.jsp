@@ -10,8 +10,13 @@
 	<script type="text/javascript">
 		$(function(){
 			$("a[href*=delete]").click(function(){
-				$(this).attr("disabled","disabled");
+				return confirm("删除该项?");
 			});
+			
+			$("a[href*=clear]").click(function(){
+				alert("清除成功!")
+				return;
+			})
 		});
 	</script>
 </head>
@@ -48,13 +53,15 @@
 					<td><s:property value="title" /></td>
 					<td><s:date name="createTime" format="MM/dd/yy HH:mm" /></td>
 					<td>
+						<s:if test="opened">开放</s:if>
+						<s:else>关闭</s:else>
 					</td>
 					<td><s:a action="SurveyAction_designSurvey?sid=%{sId}" namespace="/" cssClass="aList">设计</s:a></td>
 					<td>收集信息</td>
 					<td>分析</td>
-					<td>打开/关闭</td>
-					<td>清除调查</td>
-					<td>删除</td>
+					<td><s:a action="SurveyAction_toggleStatus?sid=%{sId}" namespace="/" cssClass="aList">打开/关闭</s:a></td>
+					<td><s:a action="SurveyAction_clearAnswers?sid=%{sId}" namespace="/" cssClass="aList">清除答案</s:a></td>
+					<td><s:a action="SurveyAction_deleteSurvey?sid=%{sId}" namespace="/" cssClass="aList">删除</s:a></td>
 				</tr>
 			</s:iterator>
 		</table>

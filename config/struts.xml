@@ -33,6 +33,11 @@
 				<param name="actionName">SurveyAction_designSurvey</param>
 				<param name="sid">${sid}</param>
 			</result>
+			
+			<result name="mySurveyList" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SurveyAction_mySurveys</param>
+			</result>
 		</global-results>
 		
 		<!-- 注册的Action -->
@@ -50,10 +55,10 @@
 		</action>
 		<!--调查的Action -->
 		<action name="SurveyAction_*" class="org.progchen.SurveyZone.action.SurveyAction" method="{1}">
-			<result name="newSurvey">/WEB-INF/jsp/newSurvey.jsp</result>
 			<result name="mySurveys">/WEB-INF/jsp/mySurveys.jsp</result>
 			<result name="designSurvey">/WEB-INF/jsp/designSurvey.jsp</result>
 			<result name="editSurvey">/WEB-INF/jsp/editSurvey.jsp</result>
+			<result name="newSurvey">/WEB-INF/jsp/newSurvey.jsp</result>
 		</action>
 		<!-- 页面的Action -->
 		<action name="PageAction_*" class="org.progchen.SurveyZone.action.PageAction" method="{1}">
@@ -63,13 +68,7 @@
 		<!--问题的Action -->
 		<action name="QuestionAction_*" class="org.progchen.SurveyZone.action.QuestionAction" method="{1}">
 			<result name="toSelectQuestionType">/WEB-INF/jsp/selectQuestionType.jsp</result>
-			<!-- 
-			<result name="deleteQuestion" type="redirectAction">
-				<param name="actionName">SurveyAction_designSurvey.do</param>
-				<param name="namespace">/</param>
-				<param name="sid">${sid}</param>
-			</result>
-			 -->
+			
 			<!-- 问题类型页面 -->
 			<result name="0">/WEB-INF/jsp/nonMatrixWithOtherQuestionDesign.jsp</result>
 			<result name="1">/WEB-INF/jsp/nonMatrixWithOtherQuestionDesign.jsp</result>

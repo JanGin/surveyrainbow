@@ -82,7 +82,7 @@
 																				<td class="tdQHeaderL"><s:property value="#q.title" /></td>
 																				<td class="tdQHeaderR">
 																					<s:a action="QuestionAction_editQuestion?qid=%{qId}&pid=%{pId}&sid=%{sId}">编辑问题</s:a>&nbsp;
-																					<s:a action="QuestionAction_deleteQuestion?qid=%{qId}" namespace="/">删除问题</s:a>&nbsp;
+																					<s:a action="QuestionAction_deleteQuestion?qid=%{qId}&sid=%{sId}" namespace="/">删除问题</s:a>&nbsp;
 																				</td>
 																			</tr>
 																			<tr>

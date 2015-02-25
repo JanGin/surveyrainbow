@@ -63,7 +63,7 @@ public class QuestionAction extends BaseAction<Question> {
 	
 	public String deleteQuestion(){
 		surveyService.deleteQuestion(qid);
-		return "deleteQuestion";
+		return "updatedSurvey";
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.progchen.SurveyZone.dao.BaseDao;
+import org.progchen.SurveyZone.domain.Answer;
 import org.progchen.SurveyZone.domain.Page;
 import org.progchen.SurveyZone.domain.Question;
 import org.progchen.SurveyZone.domain.Survey;
@@ -23,6 +24,9 @@ public class SurveyServiceImpl implements SurveyService{
 	
 	@Resource(name="questionDao")
 	private BaseDao<Question> questionDao;
+	
+	@Resource(name="answerDao")
+	private BaseDao<Answer> answerDao;
 	@Override
 	public Survey newSurvey(User user) {
 		Survey survey = new Survey();
@@ -85,8 +89,44 @@ public class SurveyServiceImpl implements SurveyService{
 
 	@Override
 	public void deleteQuestion(Integer qid) {
-		Question question = questionDao.getEntity(qid);
-		questionDao.deleteEntity(question);
+		String hql1 = "delete FROM Answer a WHERE a.questionId = ?";
+		answerDao.batchEntityByHQL(hql1, qid);
+		String hql2 = "delete FROM Question q WHERE q.id = ?";
+		questionDao.batchEntityByHQL(hql2, qid);
 	}
 
+	@Override
+	public void deletePage(Integer pid){
+		String hql1 = "delete FROM Answer a WHERE a.questionId in (select id FROM Question q WHERE q.page.id = ?)";
+		answerDao.batchEntityByHQL(hql1, pid);
+		String hql2 = "delete FROM Question q WHERE q.page.id = ?";
+		questionDao.batchEntityByHQL(hql2, pid);
+		String hql3 = "delete FROM Page p WHERE p.id = ?";
+		pageDao.batchEntityByHQL(hql3, pid);
+	}
+	
+	@Override
+	public void deleteSurvey(Integer sid){
+		String hql1 = "delete FROM Answer a WHERE a.surveyId = ?";
+		answerDao.batchEntityByHQL(hql1, sid);
+		String hql2 = "delete FROM Question q WHERE q.page.id in (select id FROM Page p WHERE p.survey.id =?)";
+		questionDao.batchEntityByHQL(hql2, sid);
+		String hql3 = "delete FROM Page p WHERE p.survey.id = ?";
+		pageDao.batchEntityByHQL(hql3, sid);
+		String hql4 = "delete FROM Survey s WHERE s.id = ?";
+		surveyDao.batchEntityByHQL(hql4, sid);
+	}
+
+	@Override
+	public void clearAnswer(Integer sid) {
+		String hql = "delete FROM Answer a WHERE a.surveyId = ?";
+		answerDao.batchEntityByHQL(hql, sid);
+	}
+
+	@Override
+	public void toggleStatus(Integer sid) {
+		Survey survey = surveyDao.getEntity(sid);
+		String hql = "UPDATE Survey s set s.opened = ? WHERE s.id = ?";
+		surveyDao.batchEntityByHQL(hql,!survey.isOpened(),sid);
+	}
 }

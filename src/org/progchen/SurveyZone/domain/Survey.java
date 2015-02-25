@@ -15,6 +15,8 @@ public class Survey {
 	private String exitText = "退出";
 	private String doneText = "完成";
 	private Date createTime = new Date();
+	//是否是开放的调查
+	private boolean opened;
 	
 	//建立从Survey到User之间多对一关联关系
 	private User user ;
@@ -37,7 +39,7 @@ public class Survey {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -92,6 +94,14 @@ public class Survey {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	
+	public boolean isOpened() {
+		return opened;
+	}
+
+	public void setOpened(boolean opened) {
+		this.opened = opened;
 	}
 
 }
