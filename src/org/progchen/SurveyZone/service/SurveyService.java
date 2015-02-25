@@ -3,6 +3,7 @@ package org.progchen.SurveyZone.service;
 import java.util.List;
 
 import org.progchen.SurveyZone.domain.Page;
+import org.progchen.SurveyZone.domain.Question;
 import org.progchen.SurveyZone.domain.Survey;
 import org.progchen.SurveyZone.domain.User;
 
@@ -47,6 +48,25 @@ public interface SurveyService {
 	 * @return
 	 */
 	Page getPage(Integer pid);
+
+	/**
+	 * 保存或更新问题
+	 * @param question
+	 */
+	void saveOrUpateQuestion(Question question);
+
+	/**
+	 * 根据id获得问题实体
+	 * @param qid
+	 * @return
+	 */
+	Question getQuestion(Integer qid);
+
+	/**
+	 * 根据id删除问题
+	 * @param qid
+	 */
+	void deleteQuestion(Integer qid);
 
 	
 }

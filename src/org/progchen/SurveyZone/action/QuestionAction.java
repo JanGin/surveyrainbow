@@ -1,5 +1,6 @@
 package org.progchen.SurveyZone.action;
 
+import org.progchen.SurveyZone.domain.Page;
 import org.progchen.SurveyZone.domain.Question;
 import org.progchen.SurveyZone.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,22 @@ public class QuestionAction extends BaseAction<Question> {
 		return "" + model.getQuestionType();
 	}
 	
+	public String saveOrUpdateQuestion(){
+		Page page = new Page();
+		page.setId(pid);
+		model.setPage(page);
+		surveyService.saveOrUpateQuestion(model);
+		return "updatedSurvey";
+	}
+	
+	public String editQuestion(){
+		this.model = surveyService.getQuestion(qid);
+		return "" + model.getQuestionType();
+	}
+	
+	public String deleteQuestion(){
+		surveyService.deleteQuestion(qid);
+		return "deleteQuestion";
+	}
 	
 }

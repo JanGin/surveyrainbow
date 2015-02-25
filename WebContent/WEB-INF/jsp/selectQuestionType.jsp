@@ -10,7 +10,7 @@
 </head>
 <body>
 	<s:include value="/header.jsp"></s:include>
-	<s:form action="QuestionAction_toAddQuestionPage?sid=%{sid}&pid=%{pid}">
+	<s:form action="QuestionAction_toAddQuestionPage.do" method="post">
 		<s:hidden name="pid" />
 		<s:hidden name="sid" />
 		<table>

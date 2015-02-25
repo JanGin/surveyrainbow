@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.progchen.SurveyZone.dao.BaseDao;
 import org.progchen.SurveyZone.domain.Page;
+import org.progchen.SurveyZone.domain.Question;
 import org.progchen.SurveyZone.domain.Survey;
 import org.progchen.SurveyZone.domain.User;
 import org.progchen.SurveyZone.service.SurveyService;
@@ -20,6 +21,8 @@ public class SurveyServiceImpl implements SurveyService{
 	@Resource(name="pageDao")
 	private BaseDao<Page> pageDao;
 	
+	@Resource(name="questionDao")
+	private BaseDao<Question> questionDao;
 	@Override
 	public Survey newSurvey(User user) {
 		Survey survey = new Survey();
@@ -68,6 +71,22 @@ public class SurveyServiceImpl implements SurveyService{
 	@Override
 	public Page getPage(Integer pid) {
 		return pageDao.getEntity(pid);
+	}
+
+	@Override
+	public void saveOrUpateQuestion(Question question) {
+		questionDao.saveOrUpdateEntity(question);
+	}
+
+	@Override
+	public Question getQuestion(Integer qid) {
+		return questionDao.getEntity(qid);
+	}
+
+	@Override
+	public void deleteQuestion(Integer qid) {
+		Question question = questionDao.getEntity(qid);
+		questionDao.deleteEntity(question);
 	}
 
 }

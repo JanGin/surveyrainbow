@@ -63,6 +63,24 @@
 		<!--问题的Action -->
 		<action name="QuestionAction_*" class="org.progchen.SurveyZone.action.QuestionAction" method="{1}">
 			<result name="toSelectQuestionType">/WEB-INF/jsp/selectQuestionType.jsp</result>
+			<!-- 
+			<result name="deleteQuestion" type="redirectAction">
+				<param name="actionName">SurveyAction_designSurvey.do</param>
+				<param name="namespace">/</param>
+				<param name="sid">${sid}</param>
+			</result>
+			 -->
+			<!-- 问题类型页面 -->
+			<result name="0">/WEB-INF/jsp/nonMatrixWithOtherQuestionDesign.jsp</result>
+			<result name="1">/WEB-INF/jsp/nonMatrixWithOtherQuestionDesign.jsp</result>
+			<result name="2">/WEB-INF/jsp/nonMatrixWithOtherQuestionDesign.jsp</result>
+			<result name="3">/WEB-INF/jsp/nonMatrixWithOtherQuestionDesign.jsp</result>
+			<result name="4">/WEB-INF/jsp/nonMatrixSelectQuestionDesign.jsp</result>
+			<result name="5">/WEB-INF/jsp/nonMatrixTextQuestionDesign.jsp</result>
+			<result name="6">/WEB-INF/jsp/matrixNormalQuestionDesign.jsp</result>
+			<result name="7">/WEB-INF/jsp/matrixNormalQuestionDesign.jsp</result>
+			<result name="8">/WEB-INF/jsp/matrixSelectQuestionDesign.jsp</result>
 		</action>
+
 	</package>
 </struts>
