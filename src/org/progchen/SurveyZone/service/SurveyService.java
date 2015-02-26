@@ -91,4 +91,9 @@ public interface SurveyService {
 	 * @param sid
 	 */
 	void toggleStatus(Integer sid);
+
+	/**
+	 * 往数据库里添加图片路径
+	 */
+	void addFilePath2DB(String path,Integer sid);
 }

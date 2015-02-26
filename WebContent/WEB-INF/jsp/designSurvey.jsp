@@ -29,11 +29,14 @@
 				</tr>
 				<tr>
 					<td class="tdSHeaderL">
+						<s:if test="logoPictureExists()">
+							<img src='<s:url value="%{logoPicPath}"/>' height="20px" width="50px">
+						</s:if>
 						<!-- 调查标题 -->
 						<s:property value="title" />
 					</td>
 					<td class="tdSHeaderR">
-						增加Logo&nbsp;
+						<s:a action="SurveyAction_toAddLogoPage?sid=%{sId}" namespace="/">增加LOGO</s:a>&nbsp;
 						<s:a action="SurveyAction_editSurvey?sid=%{sId}" namespace="/">编辑调查</s:a>&nbsp;
 						<s:a action="PageAction_addPage?sid=%{sId}" namespace="/">增加页</s:a>&nbsp;
 					</td>

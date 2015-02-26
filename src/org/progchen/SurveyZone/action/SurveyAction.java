@@ -1,25 +1,31 @@
 package org.progchen.SurveyZone.action;
 
+import java.io.File;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.util.ServletContextAware;
 import org.progchen.SurveyZone.domain.Survey;
 import org.progchen.SurveyZone.domain.User;
 import org.progchen.SurveyZone.service.SurveyService;
+import org.progchen.SurveyZone.util.ValidateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 @Controller
 @Scope("prototype")
-public class SurveyAction extends BaseAction<Survey> implements UserAware{
+public class SurveyAction extends BaseAction<Survey> implements UserAware,ServletContextAware{
 
 	private static final long serialVersionUID = 5560126741364814472L;
 
+	private ServletContext servletContext;
 	@Autowired
 	private SurveyService surveyService;
 	
 	private List<Survey> surveysList;
-
+	
 	private Integer sid;
 	
 	public Integer getSid() {
@@ -78,6 +84,59 @@ public class SurveyAction extends BaseAction<Survey> implements UserAware{
 		surveyService.toggleStatus(sid);
 		return "mySurveyList";
 	}
+	
+	/**
+	 * 到达增加logo页面
+	 */
+	public String toAddLogoPage(){
+		return "toAddLogoPage";
+	}
+	
+	/*=========================处理文件上传====================================*/
+	private String logoPictureFileName;
+	
+	private File logoPicture;
+	
+	public String getLogoPictureFileName() {
+		return logoPictureFileName;
+	}
+
+	public void setLogoPictureFileName(String logoPictureFileName) {
+		this.logoPictureFileName = logoPictureFileName;
+	}
+
+	public File getLogoPicture() {
+		return logoPicture;
+	}
+	
+	public void setLogoPicture(File logoPicture) {
+		this.logoPicture = logoPicture;
+	}
+
+	public String doAddLogo(){
+		//文件上传
+		if (ValidateUtil.isValid(logoPictureFileName)){
+			String dir = servletContext.getRealPath("/upload");
+			long timestamp = System.nanoTime();
+			String ext = logoPictureFileName.substring(logoPictureFileName.lastIndexOf("."));
+			File file = new File(dir, timestamp + ext);
+			logoPicture.renameTo(file);
+			//更新数据库
+			surveyService.addFilePath2DB("/upload/" + timestamp + ext,sid);
+		}
+
+		return "updatedSurvey";
+	}
+	
+	/*图片是否存在*/
+	@SuppressWarnings("unused")
+	private boolean logoPictureExists() {
+		if (ValidateUtil.isValid(model.getLogoPicPath())){
+			String realPath = servletContext.getRealPath(model.getLogoPicPath());
+			return new File(realPath).exists();
+		}
+		return false;
+	}
 	/*
 	 * 确保在designSurvey和getModel之前执行
 	 
@@ -100,6 +159,11 @@ public class SurveyAction extends BaseAction<Survey> implements UserAware{
 	@Override
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public void setServletContext(ServletContext arg0) {
+		this.servletContext = arg0;
 	}
 	
 }

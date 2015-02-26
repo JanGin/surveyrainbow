@@ -126,7 +126,13 @@ public class SurveyServiceImpl implements SurveyService{
 	@Override
 	public void toggleStatus(Integer sid) {
 		Survey survey = surveyDao.getEntity(sid);
-		String hql = "UPDATE Survey s set s.opened = ? WHERE s.id = ?";
+		String hql = "UPDATE Survey s SET s.opened = ? WHERE s.id = ?";
 		surveyDao.batchEntityByHQL(hql,!survey.isOpened(),sid);
+	}
+
+	@Override
+	public void addFilePath2DB(String path,Integer sid) {
+		String hql = "UPDATE Survey s SET s.logoPicPath = ? WHERE s.id = ?";
+		surveyDao.batchEntityByHQL(hql, path,sid);
 	}
 }

@@ -14,6 +14,7 @@
 		<property name="doneText" column="donetext" type="string" length="50"/>
 		<property name="createTime" column="createtime" type="timestamp" update="false" />
 		<property name="opened" column="opened" type="boolean" update="false" />
+		<property name="logoPicPath" column="logoPicPath" type="string" length="200" />
 		<!-- 映射从Survey到user之间多对一关联关系 -->
 		<many-to-one name="user" class="User" column="userid" />
 		

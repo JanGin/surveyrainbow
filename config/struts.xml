@@ -58,7 +58,11 @@
 			<result name="mySurveys">/WEB-INF/jsp/mySurveys.jsp</result>
 			<result name="designSurvey">/WEB-INF/jsp/designSurvey.jsp</result>
 			<result name="editSurvey">/WEB-INF/jsp/editSurvey.jsp</result>
-			<result name="newSurvey">/WEB-INF/jsp/newSurvey.jsp</result>
+			<result name="newSurvey" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SurveyAction_mySurveys</param>
+			</result>
+			<result name="toAddLogoPage">/WEB-INF/jsp/addLogoPage.jsp</result>
 		</action>
 		<!-- 页面的Action -->
 		<action name="PageAction_*" class="org.progchen.SurveyZone.action.PageAction" method="{1}">
